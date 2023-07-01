@@ -8,3 +8,6 @@ new_mac = input("New MAC >")
 # because it allows injections, for. example eth0; ls. So it's not secure
 subprocess.call("ifconfig " + interface + " down", shell=True)
 
+#build regex formulas here: pythex.org
+
+
