@@ -5,10 +5,16 @@
 - Impersonate other devices
 - Bypass Filters
 - Perform MAC Spoofing attack
+
+Example of usage: ./01_MAC_Changer.py -i eth0 -m 00:11:00:11:00:11
 """
 
 import subprocess
 import optparse
+import re
+
+def logger(msg):
+    print(msg)
 
 def read_args():
     # object = module.Class()
@@ -28,17 +34,35 @@ def read_args():
     return options
 
 def change_mac(iface, mac):
-    print("[+] Chancing mac address for " + iface + " to " + mac)
-
     # lets use argument list instead of string
     subprocess.call(["ifconfig", iface, "down"])
     subprocess.call(["ifconfig", iface, "hw", "ether", mac])
     subprocess.call(["ifconfig", iface, "up"])
-    subprocess.call(["ifconfig", iface])
+
+def get_current_mac(iface):
+    iface_config = subprocess.check_output(["ifconfig",iface])
+    #build regex in pythex.org site
+    mac_search_result = re.search(r"\w\w:\w\w:\w\w:\w\w:\w\w:\w\w",str(iface_config))
+
+    if mac_search_result:
+        return mac_search_result.group(0)
+    else:
+       logger("[-] Could not read MAC address. ")
 
 #read user inputs.
 options = read_args()
 
-# Call functions with user given arguments
+#check current mac
+current_mac = get_current_mac(options.interface)
+logger("[+] Current MAC address: " + str(current_mac))
+
+# Call chance mac function with user given arguments
 change_mac(options.interface, options.new_mac)
 
+#re-check mac address
+current_mac = get_current_mac(options.interface)
+
+if current_mac == options.new_mac:
+    logger("[+] MAC address succesfully changed to " + str(current_mac))
+else:
+    logger("[-] Failed to change MAC address for " + str(options.interface))
