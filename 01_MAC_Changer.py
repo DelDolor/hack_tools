@@ -10,22 +10,34 @@
 import subprocess
 import optparse
 
-def change_mac(interface, new_mac):
-    print("[+] Chancing mac address for " + interface + " to " + new_mac)
+def read_args():
+    # object = module.Class()
+    parser = optparse.OptionParser()
+    parser.add_option("-i", "--interface", dest="interface", help="Interface which MAC-address you want to change")
+    parser.add_option("-m", "--mac", dest="new_mac", help="New MAC-address to set in use")
+
+    #options contains values from user, arguments contains titles of values (-i, -m)
+    (options, arguments) = parser.parse_args()
+
+    if not options.new_mac:
+        #handle error
+        parser.error("[-] Please specify a new MAC address. Use --help for more info. ")
+    elif not options.interface:
+        #handle error
+        parser.error("[-] Please specify an interface. Use --help for more info. ")
+    return options
+
+def change_mac(iface, mac):
+    print("[+] Chancing mac address for " + iface + " to " + mac)
 
     # lets use argument list instead of string
-    subprocess.call(["ifconfig", interface, "down"])
-    subprocess.call(["ifconfig", interface, "hw", "ether", new_mac])
-    subprocess.call(["ifconfig", interface, "up"])
-    subprocess.call(["ifconfig", interface])
+    subprocess.call(["ifconfig", iface, "down"])
+    subprocess.call(["ifconfig", iface, "hw", "ether", mac])
+    subprocess.call(["ifconfig", iface, "up"])
+    subprocess.call(["ifconfig", iface])
 
-#object = module.Class()
-parser = optparse.OptionParser()
-parser.add_option("-i", "--interface", dest="interface", help="Interface which MAC-address you want to change")
-parser.add_option("-m", "--mac", dest="new_mac", help="New MAC-address to set in use")
-
-# options contains values from user, arguments contains titles of values (-i, -m)
-(options, arguments) = parser.parse_args()
+#read user inputs.
+options = read_args()
 
 # Call functions with user given arguments
 change_mac(options.interface, options.new_mac)
