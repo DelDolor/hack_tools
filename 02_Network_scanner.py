@@ -9,6 +9,8 @@
 
 import scapy.all as scapy
 from Lokittaja import Lokittaja
+log_util = Lokittaja()
+
 
 def scan(ip):
     arp_request = scapy.ARP()
@@ -21,8 +23,9 @@ def scan(ip):
 
     broadcast_ARP_req = broadcast/arp_request
     broadcast_ARP_req.show()
+    log_util.kirjoita("info"," tämä tulee scan funktiosta")
 
 
 scan("192.168.104.1/24")
-log_util = Lokittaja()
-print(log_util.kirjoita("error","viesti"))
+
+log_util.kirjoita("warning","ja tämä täältä lopusta.")

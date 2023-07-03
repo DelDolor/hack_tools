@@ -22,15 +22,7 @@ class Lokittaja:
         self.lokker.setLevel(logging.DEBUG)
 
     def kirjoita(self, level, msg):
-        if level == "debug":
-            self.lokker.debug(msg)
-        elif level == "info":
-            self.lokker.info(msg)
-        elif level == "warning":
-            self.lokker.warning(msg)
-        elif level == "error":
-            self.lokker.error(msg)
-        elif level == "critical":
-            self.lokker.critical(msg)
+        if level:
+            self.lokker.critical("[-] "+ level + ": " + msg)
         else:
             self.lokker.error("[-] Cant read log level.")
