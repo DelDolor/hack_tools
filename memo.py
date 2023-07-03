@@ -1,4 +1,4 @@
-""" My personal cheatsheet.. All the useless stuff that I wanted to keep for in safe for some reason"""""
+""" All the useless stuff that I wanted to keep for in safe for some reason"""""
 
 # You can ask values from user
 interface = input("Interface >")
