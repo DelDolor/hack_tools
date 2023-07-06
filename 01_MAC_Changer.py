@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-""" This script allows you to change your MAC address.
+""" This script allows you to change your MAC address on Linux Machine.
 - Hide your Identity
 - Impersonate other devices
 - Bypass Filters
