@@ -1,5 +1,15 @@
 """ All the useless stuff that I wanted to keep for in safe for some reason"""""
 
+#Python tutorial: https://www.tutorialspoint.com/python/index.htm
+
+#list
+tmp_list = [22,33,44,55,66]
+print(tmp_list[0])
+
+#dictionary
+tmp_dict = {"eka":22,"toka":33}
+print(tmp_dict["toka"])
+
 # You can ask values from user
 interface = input("Interface >")
 new_mac = input("New MAC >")

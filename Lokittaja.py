@@ -22,6 +22,10 @@ class Lokittaja:
         self.lokker.setLevel(logging.DEBUG)
 
     def kirjoita(self, level, msg):
+        level = str(level)
+        msg = str(msg)
+        #print("[*] " + str(level) + ": " + msg)
+
         if level == "debug":
             self.lokker.debug(msg)
         elif level == "info":
