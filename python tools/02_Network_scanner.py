@@ -13,7 +13,7 @@
         print(answered_list.summary())
 
     **********************************************************
-    Example of usage: ./02_Network_scanner.py 192.168.104.2/24
+    Example of usage: ./02_Network_scanner.py -t 192.168.104.2/24
     **********************************************************
 
 """
